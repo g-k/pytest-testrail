@@ -22,6 +22,7 @@ class APIClient:
             base_url += '/'
         self.__url = base_url + 'index.php?/api/v2/'
         self.headers = {'Content-Type': 'application/json'}
+        self.cookies = {}
 
     #
     # Send Get
@@ -40,7 +41,8 @@ class APIClient:
             url,
             auth=(self.user, self.password),
             headers=self.headers,
-            verify=cert_check
+            verify=cert_check,
+            cookies=self.cookies
         )
         return r.json()
 
@@ -64,6 +66,7 @@ class APIClient:
             auth=(self.user, self.password),
             headers=self.headers,
             data=json.dumps(data),
-            verify=cert_check
+            verify=cert_check,
+            cookies=self.cookies
         )
         return r.json()

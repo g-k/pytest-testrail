@@ -32,6 +32,8 @@ def pytest_configure(config):
         client = APIClient(cfg_file.get('API', 'url'))
         client.user = cfg_file.get('API', 'email')
         client.password = cfg_file.get('API', 'password', raw=True)
+        client.cookies = {cfg_file.get('API', 'cookie_name'): cfg_file.get('API', 'cookie_value')}
+        client.headers['User-Agent'] = cfg_file.get('API', 'user_agent') or client.user_agent
         ssl_cert_check = True
         tr_name = config.getoption('--tr_name')
 
